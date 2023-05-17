@@ -19,6 +19,15 @@ SLAMMappingService.StartMappingSession = {
   responseType: app_slammapping_v1_slammapping_pb.StartMappingSessionResponse
 };
 
+SLAMMappingService.GetMappingSession = {
+  methodName: "GetMappingSession",
+  service: SLAMMappingService,
+  requestStream: false,
+  responseStream: false,
+  requestType: app_slammapping_v1_slammapping_pb.GetMappingSessionRequest,
+  responseType: app_slammapping_v1_slammapping_pb.GetMappingSessionResponse
+};
+
 exports.SLAMMappingService = SLAMMappingService;
 
 function SLAMMappingServiceClient(serviceHost, options) {
@@ -31,6 +40,37 @@ SLAMMappingServiceClient.prototype.startMappingSession = function startMappingSe
     callback = arguments[1];
   }
   var client = grpc.unary(SLAMMappingService.StartMappingSession, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+SLAMMappingServiceClient.prototype.getMappingSession = function getMappingSession(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(SLAMMappingService.GetMappingSession, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,

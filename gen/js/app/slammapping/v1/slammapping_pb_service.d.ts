@@ -13,9 +13,19 @@ type SLAMMappingServiceStartMappingSession = {
   readonly responseType: typeof app_slammapping_v1_slammapping_pb.StartMappingSessionResponse;
 };
 
+type SLAMMappingServiceGetMappingSession = {
+  readonly methodName: string;
+  readonly service: typeof SLAMMappingService;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof app_slammapping_v1_slammapping_pb.GetMappingSessionRequest;
+  readonly responseType: typeof app_slammapping_v1_slammapping_pb.GetMappingSessionResponse;
+};
+
 export class SLAMMappingService {
   static readonly serviceName: string;
   static readonly StartMappingSession: SLAMMappingServiceStartMappingSession;
+  static readonly GetMappingSession: SLAMMappingServiceGetMappingSession;
 }
 
 export type ServiceError = { message: string, code: number; metadata: grpc.Metadata }
@@ -58,6 +68,15 @@ export class SLAMMappingServiceClient {
   startMappingSession(
     requestMessage: app_slammapping_v1_slammapping_pb.StartMappingSessionRequest,
     callback: (error: ServiceError|null, responseMessage: app_slammapping_v1_slammapping_pb.StartMappingSessionResponse|null) => void
+  ): UnaryResponse;
+  getMappingSession(
+    requestMessage: app_slammapping_v1_slammapping_pb.GetMappingSessionRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: app_slammapping_v1_slammapping_pb.GetMappingSessionResponse|null) => void
+  ): UnaryResponse;
+  getMappingSession(
+    requestMessage: app_slammapping_v1_slammapping_pb.GetMappingSessionRequest,
+    callback: (error: ServiceError|null, responseMessage: app_slammapping_v1_slammapping_pb.GetMappingSessionResponse|null) => void
   ): UnaryResponse;
 }
 

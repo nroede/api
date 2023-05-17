@@ -6,6 +6,7 @@ option go_package = "go.viam.com/api/app/slammapping/v1";
 
 service SLAMMappingService {
   rpc StartMappingSession(StartMappingSessionRequest) returns (StartMappingSessionResponse);
+  rpc GetMappingSession(GetMappingSessionRequest) returns (GetMappingSessionResponse);
 }
 
 message StartMappingSessionRequest {
@@ -13,3 +14,11 @@ message StartMappingSessionRequest {
 }
 
 message StartMappingSessionResponse {}
+
+message GetMappingSessionRequest {
+  string id = 1;
+}
+
+message GetMappingSessionResponse {
+  bytes point_cloud = 1;
+}

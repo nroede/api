@@ -138,5 +138,66 @@ proto.viam.app.slammapping.v1.SLAMMappingServicePromiseClient.prototype.startMap
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.viam.app.slammapping.v1.GetMappingSessionRequest,
+ *   !proto.viam.app.slammapping.v1.GetMappingSessionResponse>}
+ */
+const methodDescriptor_SLAMMappingService_GetMappingSession = new grpc.web.MethodDescriptor(
+  '/viam.app.slammapping.v1.SLAMMappingService/GetMappingSession',
+  grpc.web.MethodType.UNARY,
+  proto.viam.app.slammapping.v1.GetMappingSessionRequest,
+  proto.viam.app.slammapping.v1.GetMappingSessionResponse,
+  /**
+   * @param {!proto.viam.app.slammapping.v1.GetMappingSessionRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.viam.app.slammapping.v1.GetMappingSessionResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.viam.app.slammapping.v1.GetMappingSessionRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.viam.app.slammapping.v1.GetMappingSessionResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.viam.app.slammapping.v1.GetMappingSessionResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.viam.app.slammapping.v1.SLAMMappingServiceClient.prototype.getMappingSession =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/viam.app.slammapping.v1.SLAMMappingService/GetMappingSession',
+      request,
+      metadata || {},
+      methodDescriptor_SLAMMappingService_GetMappingSession,
+      callback);
+};
+
+
+/**
+ * @param {!proto.viam.app.slammapping.v1.GetMappingSessionRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.viam.app.slammapping.v1.GetMappingSessionResponse>}
+ *     Promise that resolves to the response
+ */
+proto.viam.app.slammapping.v1.SLAMMappingServicePromiseClient.prototype.getMappingSession =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/viam.app.slammapping.v1.SLAMMappingService/GetMappingSession',
+      request,
+      metadata || {},
+      methodDescriptor_SLAMMappingService_GetMappingSession);
+};
+
+
 module.exports = proto.viam.app.slammapping.v1;
 
