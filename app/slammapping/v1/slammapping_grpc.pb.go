@@ -23,7 +23,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SLAMMappingServiceClient interface {
 	StartMappingSession(ctx context.Context, in *StartMappingSessionRequest, opts ...grpc.CallOption) (*StartMappingSessionResponse, error)
-	GetMappingSession(ctx context.Context, in *GetMappingSessionRequest, opts ...grpc.CallOption) (*GetMappingSessionResponse, error)
+	GetMappingSession(ctx context.Context, in *GetMappingSessionRequest, opts ...grpc.CallOption) (SLAMMappingService_GetMappingSessionClient, error)
 }
 
 type sLAMMappingServiceClient struct {
@@ -43,13 +43,36 @@ func (c *sLAMMappingServiceClient) StartMappingSession(ctx context.Context, in *
 	return out, nil
 }
 
-func (c *sLAMMappingServiceClient) GetMappingSession(ctx context.Context, in *GetMappingSessionRequest, opts ...grpc.CallOption) (*GetMappingSessionResponse, error) {
-	out := new(GetMappingSessionResponse)
-	err := c.cc.Invoke(ctx, "/viam.app.slammapping.v1.SLAMMappingService/GetMappingSession", in, out, opts...)
+func (c *sLAMMappingServiceClient) GetMappingSession(ctx context.Context, in *GetMappingSessionRequest, opts ...grpc.CallOption) (SLAMMappingService_GetMappingSessionClient, error) {
+	stream, err := c.cc.NewStream(ctx, &SLAMMappingService_ServiceDesc.Streams[0], "/viam.app.slammapping.v1.SLAMMappingService/GetMappingSession", opts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
+	x := &sLAMMappingServiceGetMappingSessionClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type SLAMMappingService_GetMappingSessionClient interface {
+	Recv() (*GetMappingSessionResponse, error)
+	grpc.ClientStream
+}
+
+type sLAMMappingServiceGetMappingSessionClient struct {
+	grpc.ClientStream
+}
+
+func (x *sLAMMappingServiceGetMappingSessionClient) Recv() (*GetMappingSessionResponse, error) {
+	m := new(GetMappingSessionResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 // SLAMMappingServiceServer is the server API for SLAMMappingService service.
@@ -57,7 +80,7 @@ func (c *sLAMMappingServiceClient) GetMappingSession(ctx context.Context, in *Ge
 // for forward compatibility
 type SLAMMappingServiceServer interface {
 	StartMappingSession(context.Context, *StartMappingSessionRequest) (*StartMappingSessionResponse, error)
-	GetMappingSession(context.Context, *GetMappingSessionRequest) (*GetMappingSessionResponse, error)
+	GetMappingSession(*GetMappingSessionRequest, SLAMMappingService_GetMappingSessionServer) error
 	mustEmbedUnimplementedSLAMMappingServiceServer()
 }
 
@@ -68,8 +91,8 @@ type UnimplementedSLAMMappingServiceServer struct {
 func (UnimplementedSLAMMappingServiceServer) StartMappingSession(context.Context, *StartMappingSessionRequest) (*StartMappingSessionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method StartMappingSession not implemented")
 }
-func (UnimplementedSLAMMappingServiceServer) GetMappingSession(context.Context, *GetMappingSessionRequest) (*GetMappingSessionResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetMappingSession not implemented")
+func (UnimplementedSLAMMappingServiceServer) GetMappingSession(*GetMappingSessionRequest, SLAMMappingService_GetMappingSessionServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetMappingSession not implemented")
 }
 func (UnimplementedSLAMMappingServiceServer) mustEmbedUnimplementedSLAMMappingServiceServer() {}
 
@@ -102,22 +125,25 @@ func _SLAMMappingService_StartMappingSession_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
-func _SLAMMappingService_GetMappingSession_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMappingSessionRequest)
-	if err := dec(in); err != nil {
-		return nil, err
+func _SLAMMappingService_GetMappingSession_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetMappingSessionRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
 	}
-	if interceptor == nil {
-		return srv.(SLAMMappingServiceServer).GetMappingSession(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/viam.app.slammapping.v1.SLAMMappingService/GetMappingSession",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SLAMMappingServiceServer).GetMappingSession(ctx, req.(*GetMappingSessionRequest))
-	}
-	return interceptor(ctx, in, info, handler)
+	return srv.(SLAMMappingServiceServer).GetMappingSession(m, &sLAMMappingServiceGetMappingSessionServer{stream})
+}
+
+type SLAMMappingService_GetMappingSessionServer interface {
+	Send(*GetMappingSessionResponse) error
+	grpc.ServerStream
+}
+
+type sLAMMappingServiceGetMappingSessionServer struct {
+	grpc.ServerStream
+}
+
+func (x *sLAMMappingServiceGetMappingSessionServer) Send(m *GetMappingSessionResponse) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 // SLAMMappingService_ServiceDesc is the grpc.ServiceDesc for SLAMMappingService service.
@@ -131,11 +157,13 @@ var SLAMMappingService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "StartMappingSession",
 			Handler:    _SLAMMappingService_StartMappingSession_Handler,
 		},
+	},
+	Streams: []grpc.StreamDesc{
 		{
-			MethodName: "GetMappingSession",
-			Handler:    _SLAMMappingService_GetMappingSession_Handler,
+			StreamName:    "GetMappingSession",
+			Handler:       _SLAMMappingService_GetMappingSession_Handler,
+			ServerStreams: true,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
 	Metadata: "app/slammapping/v1/slammapping.proto",
 }

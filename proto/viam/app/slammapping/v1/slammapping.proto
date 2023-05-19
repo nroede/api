@@ -6,14 +6,18 @@ option go_package = "go.viam.com/api/app/slammapping/v1";
 
 service SLAMMappingService {
   rpc StartMappingSession(StartMappingSessionRequest) returns (StartMappingSessionResponse);
-  rpc GetMappingSession(GetMappingSessionRequest) returns (GetMappingSessionResponse);
+  rpc GetMappingSession(GetMappingSessionRequest) returns (stream GetMappingSessionResponse);
 }
+
+// StartMappingSession
 
 message StartMappingSessionRequest {
   string id = 1;
 }
 
 message StartMappingSessionResponse {}
+
+// GetMappingSession
 
 message GetMappingSessionRequest {
   string id = 1;

@@ -146,7 +146,7 @@ proto.viam.app.slammapping.v1.SLAMMappingServicePromiseClient.prototype.startMap
  */
 const methodDescriptor_SLAMMappingService_GetMappingSession = new grpc.web.MethodDescriptor(
   '/viam.app.slammapping.v1.SLAMMappingService/GetMappingSession',
-  grpc.web.MethodType.UNARY,
+  grpc.web.MethodType.SERVER_STREAMING,
   proto.viam.app.slammapping.v1.GetMappingSessionRequest,
   proto.viam.app.slammapping.v1.GetMappingSessionResponse,
   /**
@@ -161,37 +161,32 @@ const methodDescriptor_SLAMMappingService_GetMappingSession = new grpc.web.Metho
 
 
 /**
- * @param {!proto.viam.app.slammapping.v1.GetMappingSessionRequest} request The
- *     request proto
- * @param {?Object<string, string>} metadata User defined
+ * @param {!proto.viam.app.slammapping.v1.GetMappingSessionRequest} request The request proto
+ * @param {?Object<string, string>=} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.RpcError, ?proto.viam.app.slammapping.v1.GetMappingSessionResponse)}
- *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.viam.app.slammapping.v1.GetMappingSessionResponse>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.viam.app.slammapping.v1.GetMappingSessionResponse>}
  *     The XHR Node Readable Stream
  */
 proto.viam.app.slammapping.v1.SLAMMappingServiceClient.prototype.getMappingSession =
-    function(request, metadata, callback) {
-  return this.client_.rpcCall(this.hostname_ +
+    function(request, metadata) {
+  return this.client_.serverStreaming(this.hostname_ +
       '/viam.app.slammapping.v1.SLAMMappingService/GetMappingSession',
       request,
       metadata || {},
-      methodDescriptor_SLAMMappingService_GetMappingSession,
-      callback);
+      methodDescriptor_SLAMMappingService_GetMappingSession);
 };
 
 
 /**
- * @param {!proto.viam.app.slammapping.v1.GetMappingSessionRequest} request The
- *     request proto
+ * @param {!proto.viam.app.slammapping.v1.GetMappingSessionRequest} request The request proto
  * @param {?Object<string, string>=} metadata User defined
  *     call metadata
- * @return {!Promise<!proto.viam.app.slammapping.v1.GetMappingSessionResponse>}
- *     Promise that resolves to the response
+ * @return {!grpc.web.ClientReadableStream<!proto.viam.app.slammapping.v1.GetMappingSessionResponse>}
+ *     The XHR Node Readable Stream
  */
 proto.viam.app.slammapping.v1.SLAMMappingServicePromiseClient.prototype.getMappingSession =
     function(request, metadata) {
-  return this.client_.unaryCall(this.hostname_ +
+  return this.client_.serverStreaming(this.hostname_ +
       '/viam.app.slammapping.v1.SLAMMappingService/GetMappingSession',
       request,
       metadata || {},

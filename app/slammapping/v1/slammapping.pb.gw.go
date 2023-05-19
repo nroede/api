@@ -65,7 +65,7 @@ func local_request_SLAMMappingService_StartMappingSession_0(ctx context.Context,
 
 }
 
-func request_SLAMMappingService_GetMappingSession_0(ctx context.Context, marshaler runtime.Marshaler, client SLAMMappingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_SLAMMappingService_GetMappingSession_0(ctx context.Context, marshaler runtime.Marshaler, client SLAMMappingServiceClient, req *http.Request, pathParams map[string]string) (SLAMMappingService_GetMappingSessionClient, runtime.ServerMetadata, error) {
 	var protoReq GetMappingSessionRequest
 	var metadata runtime.ServerMetadata
 
@@ -77,25 +77,16 @@ func request_SLAMMappingService_GetMappingSession_0(ctx context.Context, marshal
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := client.GetMappingSession(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
-	return msg, metadata, err
-
-}
-
-func local_request_SLAMMappingService_GetMappingSession_0(ctx context.Context, marshaler runtime.Marshaler, server SLAMMappingServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetMappingSessionRequest
-	var metadata runtime.ServerMetadata
-
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	stream, err := client.GetMappingSession(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
 	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
 	}
-
-	msg, err := server.GetMappingSession(ctx, &protoReq)
-	return msg, metadata, err
+	metadata.HeaderMD = header
+	return stream, metadata, nil
 
 }
 
@@ -131,28 +122,10 @@ func RegisterSLAMMappingServiceHandlerServer(ctx context.Context, mux *runtime.S
 	})
 
 	mux.Handle("POST", pattern_SLAMMappingService_GetMappingSession_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
-		ctx, cancel := context.WithCancel(req.Context())
-		defer cancel()
-		var stream runtime.ServerTransportStream
-		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
-		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/viam.app.slammapping.v1.SLAMMappingService/GetMappingSession", runtime.WithHTTPPathPattern("/viam.app.slammapping.v1.SLAMMappingService/GetMappingSession"))
-		if err != nil {
-			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
-			return
-		}
-		resp, md, err := local_request_SLAMMappingService_GetMappingSession_0(annotatedContext, inboundMarshaler, server, req, pathParams)
-		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
-		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
-		if err != nil {
-			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
-			return
-		}
-
-		forward_SLAMMappingService_GetMappingSession_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
 	})
 
 	return nil
@@ -236,7 +209,7 @@ func RegisterSLAMMappingServiceHandlerClient(ctx context.Context, mux *runtime.S
 			return
 		}
 
-		forward_SLAMMappingService_GetMappingSession_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_SLAMMappingService_GetMappingSession_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -252,5 +225,5 @@ var (
 var (
 	forward_SLAMMappingService_StartMappingSession_0 = runtime.ForwardResponseMessage
 
-	forward_SLAMMappingService_GetMappingSession_0 = runtime.ForwardResponseMessage
+	forward_SLAMMappingService_GetMappingSession_0 = runtime.ForwardResponseStream
 )
