@@ -2,6 +2,7 @@
 // file: app/slammapping/v1/slammapping.proto
 
 import * as jspb from "google-protobuf";
+import * as common_v1_common_pb from "../../../common/v1/common_pb";
 
 export class StartMappingSessionRequest extends jspb.Message {
   getId(): string;
@@ -65,6 +66,11 @@ export class GetMappingSessionResponse extends jspb.Message {
   getPointCloud_asB64(): string;
   setPointCloud(value: Uint8Array | string): void;
 
+  hasPose(): boolean;
+  clearPose(): void;
+  getPose(): common_v1_common_pb.Pose | undefined;
+  setPose(value?: common_v1_common_pb.Pose): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetMappingSessionResponse.AsObject;
   static toObject(includeInstance: boolean, msg: GetMappingSessionResponse): GetMappingSessionResponse.AsObject;
@@ -78,6 +84,7 @@ export class GetMappingSessionResponse extends jspb.Message {
 export namespace GetMappingSessionResponse {
   export type AsObject = {
     pointCloud: Uint8Array | string,
+    pose?: common_v1_common_pb.Pose.AsObject,
   }
 }
 

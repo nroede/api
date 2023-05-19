@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package viam.app.slammapping.v1;
 
+import "common/v1/common.proto";
+
 option go_package = "go.viam.com/api/app/slammapping/v1";
 
 service SLAMMappingService {
@@ -25,4 +27,6 @@ message GetMappingSessionRequest {
 
 message GetMappingSessionResponse {
   bytes point_cloud = 1;
+  // Current position of the specified component in the SLAM Map
+  common.v1.Pose pose = 2;
 }

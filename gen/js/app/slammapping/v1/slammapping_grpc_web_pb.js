@@ -19,6 +19,8 @@
 const grpc = {};
 grpc.web = require('grpc-web');
 
+
+var common_v1_common_pb = require('../../../common/v1/common_pb.js')
 const proto = {};
 proto.viam = {};
 proto.viam.app = {};

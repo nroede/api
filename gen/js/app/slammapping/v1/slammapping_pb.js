@@ -15,6 +15,8 @@ var jspb = require('google-protobuf');
 var goog = jspb;
 var global = (function() { return this || window || global || self || Function('return this')(); }).call(null);
 
+var common_v1_common_pb = require('../../../common/v1/common_pb.js');
+goog.object.extend(proto, common_v1_common_pb);
 goog.exportSymbol('proto.viam.app.slammapping.v1.GetMappingSessionRequest', null, global);
 goog.exportSymbol('proto.viam.app.slammapping.v1.GetMappingSessionResponse', null, global);
 goog.exportSymbol('proto.viam.app.slammapping.v1.StartMappingSessionRequest', null, global);
@@ -496,7 +498,8 @@ proto.viam.app.slammapping.v1.GetMappingSessionResponse.prototype.toObject = fun
  */
 proto.viam.app.slammapping.v1.GetMappingSessionResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    pointCloud: msg.getPointCloud_asB64()
+    pointCloud: msg.getPointCloud_asB64(),
+    pose: (f = msg.getPose()) && common_v1_common_pb.Pose.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -537,6 +540,11 @@ proto.viam.app.slammapping.v1.GetMappingSessionResponse.deserializeBinaryFromRea
       var value = /** @type {!Uint8Array} */ (reader.readBytes());
       msg.setPointCloud(value);
       break;
+    case 2:
+      var value = new common_v1_common_pb.Pose;
+      reader.readMessage(value,common_v1_common_pb.Pose.deserializeBinaryFromReader);
+      msg.setPose(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -571,6 +579,14 @@ proto.viam.app.slammapping.v1.GetMappingSessionResponse.serializeBinaryToWriter 
     writer.writeBytes(
       1,
       f
+    );
+  }
+  f = message.getPose();
+  if (f != null) {
+    writer.writeMessage(
+      2,
+      f,
+      common_v1_common_pb.Pose.serializeBinaryToWriter
     );
   }
 };
@@ -615,6 +631,43 @@ proto.viam.app.slammapping.v1.GetMappingSessionResponse.prototype.getPointCloud_
  */
 proto.viam.app.slammapping.v1.GetMappingSessionResponse.prototype.setPointCloud = function(value) {
   return jspb.Message.setProto3BytesField(this, 1, value);
+};
+
+
+/**
+ * optional viam.common.v1.Pose pose = 2;
+ * @return {?proto.viam.common.v1.Pose}
+ */
+proto.viam.app.slammapping.v1.GetMappingSessionResponse.prototype.getPose = function() {
+  return /** @type{?proto.viam.common.v1.Pose} */ (
+    jspb.Message.getWrapperField(this, common_v1_common_pb.Pose, 2));
+};
+
+
+/**
+ * @param {?proto.viam.common.v1.Pose|undefined} value
+ * @return {!proto.viam.app.slammapping.v1.GetMappingSessionResponse} returns this
+*/
+proto.viam.app.slammapping.v1.GetMappingSessionResponse.prototype.setPose = function(value) {
+  return jspb.Message.setWrapperField(this, 2, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.viam.app.slammapping.v1.GetMappingSessionResponse} returns this
+ */
+proto.viam.app.slammapping.v1.GetMappingSessionResponse.prototype.clearPose = function() {
+  return this.setPose(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.viam.app.slammapping.v1.GetMappingSessionResponse.prototype.hasPose = function() {
+  return jspb.Message.getField(this, 2) != null;
 };
 
 
