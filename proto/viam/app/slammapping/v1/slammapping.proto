@@ -15,6 +15,30 @@ service SLAMMappingService {
 
 message StartMappingSessionRequest {
   string id = 1;
+  // How many trajectory nodes are inserted before the global optimization is run.
+  double optimize_every_n_nodes = 2;
+  // Number of measurements in each submap.
+  double num_range_data = 3;
+  // 	Replaces the length of ranges that are further than max_range with this value.
+  double missing_data_ray_length = 4;
+  // Maximum range of valid measurements.
+  double max_range = 5;
+  // Minimum range of valid measurements.
+  double min_range = 6;
+  // Number of submaps to use and track for localization.
+  double max_submaps_to_keep = 7;
+  // Length of submap history considered when running SLAM in updating mode.
+  double fresh_submaps_count = 8;
+  // The minimum overlapping area, in square meters, for an old submap to be considered for deletion.
+  double min_covered_area = 9;
+  // The minimum number of added submaps before deletion of the old submap is considered.
+  double min_added_submaps_count = 10;
+  // Emphasis to put on scanned data points between measurements.
+  double occupied_space_weight = 11;
+  // Emphasis to put on expected translational change from pose extrapolator data between measurements.
+  double translation_weight = 12;
+  // Emphasis to put on expected rotational change from pose extrapolator data between measurements.
+  double rotation_weight = 13;
 }
 
 message StartMappingSessionResponse {}

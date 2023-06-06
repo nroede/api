@@ -137,7 +137,19 @@ proto.viam.app.slammapping.v1.StartMappingSessionRequest.prototype.toObject = fu
  */
 proto.viam.app.slammapping.v1.StartMappingSessionRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, "")
+    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    optimizeEveryNNodes: jspb.Message.getFloatingPointFieldWithDefault(msg, 2, 0.0),
+    numRangeData: jspb.Message.getFloatingPointFieldWithDefault(msg, 3, 0.0),
+    missingDataRayLength: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0),
+    maxRange: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
+    minRange: jspb.Message.getFloatingPointFieldWithDefault(msg, 6, 0.0),
+    maxSubmapsToKeep: jspb.Message.getFloatingPointFieldWithDefault(msg, 7, 0.0),
+    freshSubmapsCount: jspb.Message.getFloatingPointFieldWithDefault(msg, 8, 0.0),
+    minCoveredArea: jspb.Message.getFloatingPointFieldWithDefault(msg, 9, 0.0),
+    minAddedSubmapsCount: jspb.Message.getFloatingPointFieldWithDefault(msg, 10, 0.0),
+    occupiedSpaceWeight: jspb.Message.getFloatingPointFieldWithDefault(msg, 11, 0.0),
+    translationWeight: jspb.Message.getFloatingPointFieldWithDefault(msg, 12, 0.0),
+    rotationWeight: jspb.Message.getFloatingPointFieldWithDefault(msg, 13, 0.0)
   };
 
   if (includeInstance) {
@@ -178,6 +190,54 @@ proto.viam.app.slammapping.v1.StartMappingSessionRequest.deserializeBinaryFromRe
       var value = /** @type {string} */ (reader.readString());
       msg.setId(value);
       break;
+    case 2:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setOptimizeEveryNNodes(value);
+      break;
+    case 3:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setNumRangeData(value);
+      break;
+    case 4:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setMissingDataRayLength(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setMaxRange(value);
+      break;
+    case 6:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setMinRange(value);
+      break;
+    case 7:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setMaxSubmapsToKeep(value);
+      break;
+    case 8:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setFreshSubmapsCount(value);
+      break;
+    case 9:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setMinCoveredArea(value);
+      break;
+    case 10:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setMinAddedSubmapsCount(value);
+      break;
+    case 11:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setOccupiedSpaceWeight(value);
+      break;
+    case 12:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setTranslationWeight(value);
+      break;
+    case 13:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setRotationWeight(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -214,6 +274,90 @@ proto.viam.app.slammapping.v1.StartMappingSessionRequest.serializeBinaryToWriter
       f
     );
   }
+  f = message.getOptimizeEveryNNodes();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      2,
+      f
+    );
+  }
+  f = message.getNumRangeData();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      3,
+      f
+    );
+  }
+  f = message.getMissingDataRayLength();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      4,
+      f
+    );
+  }
+  f = message.getMaxRange();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      5,
+      f
+    );
+  }
+  f = message.getMinRange();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      6,
+      f
+    );
+  }
+  f = message.getMaxSubmapsToKeep();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      7,
+      f
+    );
+  }
+  f = message.getFreshSubmapsCount();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      8,
+      f
+    );
+  }
+  f = message.getMinCoveredArea();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      9,
+      f
+    );
+  }
+  f = message.getMinAddedSubmapsCount();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      10,
+      f
+    );
+  }
+  f = message.getOccupiedSpaceWeight();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      11,
+      f
+    );
+  }
+  f = message.getTranslationWeight();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      12,
+      f
+    );
+  }
+  f = message.getRotationWeight();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      13,
+      f
+    );
+  }
 };
 
 
@@ -232,6 +376,222 @@ proto.viam.app.slammapping.v1.StartMappingSessionRequest.prototype.getId = funct
  */
 proto.viam.app.slammapping.v1.StartMappingSessionRequest.prototype.setId = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional double optimize_every_n_nodes = 2;
+ * @return {number}
+ */
+proto.viam.app.slammapping.v1.StartMappingSessionRequest.prototype.getOptimizeEveryNNodes = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 2, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.viam.app.slammapping.v1.StartMappingSessionRequest} returns this
+ */
+proto.viam.app.slammapping.v1.StartMappingSessionRequest.prototype.setOptimizeEveryNNodes = function(value) {
+  return jspb.Message.setProto3FloatField(this, 2, value);
+};
+
+
+/**
+ * optional double num_range_data = 3;
+ * @return {number}
+ */
+proto.viam.app.slammapping.v1.StartMappingSessionRequest.prototype.getNumRangeData = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 3, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.viam.app.slammapping.v1.StartMappingSessionRequest} returns this
+ */
+proto.viam.app.slammapping.v1.StartMappingSessionRequest.prototype.setNumRangeData = function(value) {
+  return jspb.Message.setProto3FloatField(this, 3, value);
+};
+
+
+/**
+ * optional double missing_data_ray_length = 4;
+ * @return {number}
+ */
+proto.viam.app.slammapping.v1.StartMappingSessionRequest.prototype.getMissingDataRayLength = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 4, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.viam.app.slammapping.v1.StartMappingSessionRequest} returns this
+ */
+proto.viam.app.slammapping.v1.StartMappingSessionRequest.prototype.setMissingDataRayLength = function(value) {
+  return jspb.Message.setProto3FloatField(this, 4, value);
+};
+
+
+/**
+ * optional double max_range = 5;
+ * @return {number}
+ */
+proto.viam.app.slammapping.v1.StartMappingSessionRequest.prototype.getMaxRange = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 5, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.viam.app.slammapping.v1.StartMappingSessionRequest} returns this
+ */
+proto.viam.app.slammapping.v1.StartMappingSessionRequest.prototype.setMaxRange = function(value) {
+  return jspb.Message.setProto3FloatField(this, 5, value);
+};
+
+
+/**
+ * optional double min_range = 6;
+ * @return {number}
+ */
+proto.viam.app.slammapping.v1.StartMappingSessionRequest.prototype.getMinRange = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 6, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.viam.app.slammapping.v1.StartMappingSessionRequest} returns this
+ */
+proto.viam.app.slammapping.v1.StartMappingSessionRequest.prototype.setMinRange = function(value) {
+  return jspb.Message.setProto3FloatField(this, 6, value);
+};
+
+
+/**
+ * optional double max_submaps_to_keep = 7;
+ * @return {number}
+ */
+proto.viam.app.slammapping.v1.StartMappingSessionRequest.prototype.getMaxSubmapsToKeep = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 7, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.viam.app.slammapping.v1.StartMappingSessionRequest} returns this
+ */
+proto.viam.app.slammapping.v1.StartMappingSessionRequest.prototype.setMaxSubmapsToKeep = function(value) {
+  return jspb.Message.setProto3FloatField(this, 7, value);
+};
+
+
+/**
+ * optional double fresh_submaps_count = 8;
+ * @return {number}
+ */
+proto.viam.app.slammapping.v1.StartMappingSessionRequest.prototype.getFreshSubmapsCount = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 8, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.viam.app.slammapping.v1.StartMappingSessionRequest} returns this
+ */
+proto.viam.app.slammapping.v1.StartMappingSessionRequest.prototype.setFreshSubmapsCount = function(value) {
+  return jspb.Message.setProto3FloatField(this, 8, value);
+};
+
+
+/**
+ * optional double min_covered_area = 9;
+ * @return {number}
+ */
+proto.viam.app.slammapping.v1.StartMappingSessionRequest.prototype.getMinCoveredArea = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 9, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.viam.app.slammapping.v1.StartMappingSessionRequest} returns this
+ */
+proto.viam.app.slammapping.v1.StartMappingSessionRequest.prototype.setMinCoveredArea = function(value) {
+  return jspb.Message.setProto3FloatField(this, 9, value);
+};
+
+
+/**
+ * optional double min_added_submaps_count = 10;
+ * @return {number}
+ */
+proto.viam.app.slammapping.v1.StartMappingSessionRequest.prototype.getMinAddedSubmapsCount = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 10, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.viam.app.slammapping.v1.StartMappingSessionRequest} returns this
+ */
+proto.viam.app.slammapping.v1.StartMappingSessionRequest.prototype.setMinAddedSubmapsCount = function(value) {
+  return jspb.Message.setProto3FloatField(this, 10, value);
+};
+
+
+/**
+ * optional double occupied_space_weight = 11;
+ * @return {number}
+ */
+proto.viam.app.slammapping.v1.StartMappingSessionRequest.prototype.getOccupiedSpaceWeight = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 11, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.viam.app.slammapping.v1.StartMappingSessionRequest} returns this
+ */
+proto.viam.app.slammapping.v1.StartMappingSessionRequest.prototype.setOccupiedSpaceWeight = function(value) {
+  return jspb.Message.setProto3FloatField(this, 11, value);
+};
+
+
+/**
+ * optional double translation_weight = 12;
+ * @return {number}
+ */
+proto.viam.app.slammapping.v1.StartMappingSessionRequest.prototype.getTranslationWeight = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 12, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.viam.app.slammapping.v1.StartMappingSessionRequest} returns this
+ */
+proto.viam.app.slammapping.v1.StartMappingSessionRequest.prototype.setTranslationWeight = function(value) {
+  return jspb.Message.setProto3FloatField(this, 12, value);
+};
+
+
+/**
+ * optional double rotation_weight = 13;
+ * @return {number}
+ */
+proto.viam.app.slammapping.v1.StartMappingSessionRequest.prototype.getRotationWeight = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 13, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.viam.app.slammapping.v1.StartMappingSessionRequest} returns this
+ */
+proto.viam.app.slammapping.v1.StartMappingSessionRequest.prototype.setRotationWeight = function(value) {
+  return jspb.Message.setProto3FloatField(this, 13, value);
 };
 
 

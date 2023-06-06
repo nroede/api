@@ -173,7 +173,7 @@ func local_request_PoseTrackerService_DoCommand_0(ctx context.Context, marshaler
 }
 
 func request_PoseTrackerService_GetGeometries_0(ctx context.Context, marshaler runtime.Marshaler, client PoseTrackerServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq v1_0.GetGeometriesRequest
+	var protoReq v1.GetGeometriesRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -199,7 +199,7 @@ func request_PoseTrackerService_GetGeometries_0(ctx context.Context, marshaler r
 }
 
 func local_request_PoseTrackerService_GetGeometries_0(ctx context.Context, marshaler runtime.Marshaler, server PoseTrackerServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq v1_0.GetGeometriesRequest
+	var protoReq v1.GetGeometriesRequest
 	var metadata runtime.ServerMetadata
 
 	var (

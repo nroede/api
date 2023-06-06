@@ -8,6 +8,42 @@ export class StartMappingSessionRequest extends jspb.Message {
   getId(): string;
   setId(value: string): void;
 
+  getOptimizeEveryNNodes(): number;
+  setOptimizeEveryNNodes(value: number): void;
+
+  getNumRangeData(): number;
+  setNumRangeData(value: number): void;
+
+  getMissingDataRayLength(): number;
+  setMissingDataRayLength(value: number): void;
+
+  getMaxRange(): number;
+  setMaxRange(value: number): void;
+
+  getMinRange(): number;
+  setMinRange(value: number): void;
+
+  getMaxSubmapsToKeep(): number;
+  setMaxSubmapsToKeep(value: number): void;
+
+  getFreshSubmapsCount(): number;
+  setFreshSubmapsCount(value: number): void;
+
+  getMinCoveredArea(): number;
+  setMinCoveredArea(value: number): void;
+
+  getMinAddedSubmapsCount(): number;
+  setMinAddedSubmapsCount(value: number): void;
+
+  getOccupiedSpaceWeight(): number;
+  setOccupiedSpaceWeight(value: number): void;
+
+  getTranslationWeight(): number;
+  setTranslationWeight(value: number): void;
+
+  getRotationWeight(): number;
+  setRotationWeight(value: number): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): StartMappingSessionRequest.AsObject;
   static toObject(includeInstance: boolean, msg: StartMappingSessionRequest): StartMappingSessionRequest.AsObject;
@@ -21,6 +57,18 @@ export class StartMappingSessionRequest extends jspb.Message {
 export namespace StartMappingSessionRequest {
   export type AsObject = {
     id: string,
+    optimizeEveryNNodes: number,
+    numRangeData: number,
+    missingDataRayLength: number,
+    maxRange: number,
+    minRange: number,
+    maxSubmapsToKeep: number,
+    freshSubmapsCount: number,
+    minCoveredArea: number,
+    minAddedSubmapsCount: number,
+    occupiedSpaceWeight: number,
+    translationWeight: number,
+    rotationWeight: number,
   }
 }
 
